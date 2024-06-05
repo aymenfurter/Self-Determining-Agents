@@ -1,3 +1,7 @@
 openai
 requests
 Pillow
+rich
+markdown2
+torch
+transformers

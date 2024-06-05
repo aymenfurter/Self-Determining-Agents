@@ -1,5 +1,11 @@
 import asyncio
 import base64
+from rich.console import Console
+from rich.markdown import Markdown
+import markdown2
+
+import torch
+from transformers import CLIPProcessor, CLIPModel
 
 from datetime import datetime
 
@@ -8,6 +14,8 @@ from io import BytesIO
 import requests
 from PIL import Image
 from openai import OpenAI
+import os
+
 client = OpenAI()
 
 async def send_a():
@@ -47,14 +55,14 @@ async def send_b():
     await asyncio.sleep(0.2)
     requests.get("http://localhost:8080/input?B=0")
 
-def get_image_as_base64():
+def get_current_screen():
     image_url = "http://localhost:8080/screen"
     response = requests.get(image_url)
     response.raise_for_status()
     return base64.b64encode(response.content).decode('utf-8')
 
 def get_local_image_as_base64(filename):
-    with open("examples/" + filename, "rb") as image:
+    with open(f"examples/{filename}", "rb") as image:
         return base64.b64encode(image.read()).decode('utf-8')
 
 async def send_start():
@@ -81,16 +89,61 @@ async def execute_moves(moves):
         elif move == "start":
             await send_start()
 
-# TODO: implement method that caulcates the difference integer between (0 and 100) between two images (encoded as base64) - Additional metric for the LLM to use
+model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
+processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+
 def calculate_image_difference(image1, image2):
     return 0
+
+def print_markdown(markdown_text: str):
+    console = Console()
+    md = Markdown(markdown2.markdown(markdown_text))
+    console.print(md)
+
+def get_example_prompt(filename):
+    text_filename = filename.replace(".png", ".txt")
+    with open(f"examples/{text_filename}", "r") as file:
+        return file.read()
+
+def get_image_as_base64(image_path=None):
+    if image_path:
+        try:
+            with open(image_path, "rb") as image_file:
+                image_data = image_file.read()
+                return base64.b64encode(image_data).decode('utf-8')
+        except FileNotFoundError:
+            print(f"Error: Image file '{image_path}' not found.")
+        except Exception as e:
+            print(f"Error while reading image file '{image_path}': {e}")
+    else:
+        print("Error: Image path is not provided.")
+    return None
+
+def get_clip_embedding(image_base64):
+    image_data = base64.b64decode(image_base64)
+    image = Image.open(BytesIO(image_data)).convert("RGB")
+    inputs = processor(images=image, return_tensors="pt")
+    outputs = model.get_image_features(**inputs)
+    return outputs
+
+def find_closest_images(base64_image, example_images, top_k=30):
+    base_image_embedding = get_clip_embedding(base64_image)
+    similarities = []
+    for example_image in example_images:
+        example_image_base64 = get_image_as_base64(f"examples/{example_image}")
+        example_image_embedding = get_clip_embedding(example_image_base64)
+        similarity = torch.cosine_similarity(base_image_embedding, example_image_embedding).item()
+        similarities.append((similarity, example_image))
+    
+    similarities.sort(reverse=True, key=lambda x: x[0])
+    return [image for _, image in similarities[:top_k]]
 
 async def main():
     current_time_minutes = datetime.now().minute
     past_states = []
 
     while True:
-        base64_image = get_image_as_base64()
+        base64_image = get_current_screen()
 
         tools = [
             {
@@ -145,8 +198,8 @@ async def main():
                                         "move": {"type": "string", "enum": ["up", "down", "left", "right", "a", "b", "start"], "description": "Suggested move."}
                                     }
                                 },
-                                "description": "Up to 5 next moves",
-                                "maxItems": 5
+                                "description": "Up to 4 next moves",
+                                "maxItems": 4
                             }
                         },
                         "required": ["strategy", "ScreenDescription", "TerminalGoals", "InstrumentalGoals", "NextActions"]
@@ -163,441 +216,59 @@ You are speedrunning Pokemon game. You must rush through the game as quickly as 
 
 You are playing the game by analyzing the **current screenshot**  updating a so called **game plan**.
 
+Analyze the screenshot, plan the next moves. If are moving on map, visualize each move step by step. Consider past game states and screenshots to determine if you are moving in the right direction.
+
 To help you with the game you will be given two types of additional information:
-- **Past game plans & screenshots**: You will be given the game plan and screenshot of the previous 10 game states.
+- **Past game plans & screenshots**: You will be given the game plan and screenshot of the previous 5 game states. Some examples are just for instructing path finding.
 - **Example Moves**: You will be given three expert moves from various situations in the game.
 
-IMPORTANT: ALWAYS call updateGamePlan function to update the game plan with the next 5 moves. No other output is allowed.
 IMPORTANT: Compare the current and previous game screenshots to determine if you are making progress. You are sometimes mixing up the directions. Try out different directions and check if the environment changes.
-IMPORTANT: If the game screenshot don't change after a few moves, you might be stuck. You are seeing a bit blurry, so there might be a obstacle in the way. Try to move 1-2 steps in different directions to see if the environment changes.
+
+
+While you are on maps:
+IMPORTANT: 
+IN YOUR STRATEGY (Additional Chapter called: ## Orientation above Terminal Goals): ORIENT YOURSELF: WRITE FIRST WHAT I CAN FIND UP, DOWN, LEFT, RIGHT OF THE MAP. LIST ALL OBJECTS AND LOCATIONS. Example: I am currently in a room. On the rigth side there is a wall. On the left side there is a wall. On the bottom as well. Top right I can see a staircase. (this is not shown in the example but you MUST do it).
+Example
+- Top: Wall / Black Space (Obsticle)
+- Right: Wall / Black Space (Obsticle)
+- Bottom: Warp (Rug) leading outside (Bottom left), Wall / Black Space (Obsticle) (Bottom)
+- Left: Table, chairs, a character, Wall / Black Space (Obsticle)
+- Warps: Bottom left warp leads to a room with a chest.
+
+IMPORTANT: On Maps: Never plan ahead of the current map. Never plan ahead of warps.
+
+
 """
 
-        example_1_prompt = """## Example Game State 1
+        messages = [
+            {
+                "role": "system",
+                "content": system_prompt
+            }
+        ]
 
-## Previous Game State
-{
-  "strategy": "Given the number of minutes played we are in the beginning of the game. We should focus on finding Doctor Oak to get our first Pokemon.",
-  "TerminalGoals": [
-    {
-      "goal": "Find Doctor Oak"
-    }
-  ],
-  "InstrumentalGoals": [
-    {
-      "goal": "Leave the house and go to the north to find Doctor Oak."
-    }
-  ],
-  "CompletedGoals": [],
-  "NextActions": [
-    {
-      "move": left"
-    }, 
-    {
-      "move": "left"
-    },
-    {
-      "move": "left"
-    }
-]
-}
-        
-## Expected Game Plan (calling updateGamePlan)
-{
-  "strategy": "Given the number of minutes played we are in the beginning of the game. We should focus on finding Doctor Oak to get our first Pokemon.",
-  "TerminalGoals": [
-    {
-      "goal": "Find Doctor Oak"
-    }
-  ],
-  "InstrumentalGoals": [
-    {
-      "goal": "Leave the house and go to the north to find Doctor Oak."
-    }
-  ],
-  "CompletedGoals": [],
-  "NextActions": [
-    {
-      "move": left"
-    }, 
-    {
-      "move": "down"
-    } 
-]
-}
-"""
+        example_files = sorted([f for f in os.listdir("examples") if f.endswith(".png")])
 
-        example_2_prompt = """## Example Game State 2
+        closest_examples = find_closest_images(base64_image, example_files)
 
-## Previous Game State
-{
-  "strategy": "We need to win the battle against the rival.",
-  "TerminalGoals": [
-    {
-      "goal": "Beat rival in pokemon battle."
-    }
-  ],
-  "InstrumentalGoals": [
-    {
-      "goal": "Attack with Shiggy using Tackle to win the battle."
-    }
-  ],
-  "CompletedGoals": [
-    {
-      "goal": "Find Doctor Oak."
-    },
-    {
-      "goal": "Get the first Pokemon."
-    },
-  ],
-  "NextActions": [
-    {
-      "move": a"
-    }, 
-    {
-      "move": "a"
-    },
-    {
-      "move": "a"
-    }
-]
-}
-        
-## Expected Game Plan (calling updateGamePlan)
-{
-  "strategy": "We won the battle against the rival. Now we need to complete the text dialog to progress in the game",
-  "TerminalGoals": [
-    {
-        "goal": "Travel to the next city in the north, Viridian City."
-    }
-  ],
-  "InstrumentalGoals": [
-    {
-      "goal": "Complete the text dialog to progress in the game."
-    },
-    {
-      "goal": "Leave the building by going down."
-    }
-  ],
-  "CompletedGoals": [
-    {
-      "goal": "Beat rival in pokemon battle."
-    },
-    {
-      "goal": "Find Doctor Oak."
-    },
-    {
-      "goal": "Get the first Pokemon."
-    },
-  ],
-  "NextActions": [
-    {
-      "move": a"
-    }, 
-    {
-      "move": "a"
-    },
-    {
-      "move": "a"
-    },
-    {
-      "move": "a"
-    }
-  ]
-}
-"""
-
-        example_3_prompt = """## Example Game State 3
-
-## Previous Game State
-{
-  "strategy": "We are currently in a battle against Bisasam with our Schiggy. Schiggy has 11/20 HP. The move set includes Tackle (Tackle) and Rutenschlag (Tail Whip). Proceed with the most effective strategy to win the battle.",
-  "TerminalGoals": [
-    {
-      "goal": "Beat rival in pokemon battle."
-    }
-  ],
-  "InstrumentalGoals": [
-    {
-      "goal": "Use high-damage moves to defeat Bisasam quickly to minimize damage taken by Schiggy."
-    }
-  ],  
-  "CompletedGoals": [
-    {
-      "goal": "Find Doctor Oak."
-    },
-    {
-      "goal": "Get the first Pokemon."
-    },
-  ],
-  "NextActions": [
-    {
-      "move": "a"
-    }
-  ]
-}
-        
-## Expected Game Plan (calling updateGamePlan)
-{
-  "strategy": "We are currently in a battle against Bisasam with our Schiggy. Let's proceed with using Tackle to reduce the HP of the enemy Bisasam.",
-  "TerminalGoals": [
-    {
-      "goal": "Beat rival in pokemon battle."
-    }
-  ],
-  "InstrumentalGoals": [
-    {
-      "goal": "Use high-damage moves to defeat Bisasam quickly to minimize damage taken by Schiggy."
-    }
-  ],
-  "CompletedGoals": [
-    {
-      "goal": "Find Doctor Oak."
-    },
-    {
-      "goal": "Get the first Pokemon."
-    },
-  ],
-  "NextActions": [
-    {
-      "move": "a"
-    },
-    {
-      "move": "a"
-    },
-    {
-      "move": "a"
-    },
-    {
-      "move": "a"
-    }
-  ]
-}
-"""
-        example_4_prompt = """## Example Game State 4
-
-## Previous Game State
-{
-  "strategy": "We are currently on our way to the next city, Viridian City. We need to go up to go north to reach the city.",
-  "TerminalGoals": [
-    {
-        "goal": "Travel to the next city in the north, Viridian City."
-    }
-  ],
-  "InstrumentalGoals": [
-    {
-      "goal": "Navigate to the north of the city."
-    }
-  ],
-  "CompletedGoals": [
-    {
-      "goal": "Find Doctor Oak."
-    },
-    {
-      "goal": "Get the first Pokemon."
-    },
-    {
-      "goal": "Beat rival in pokemon battle."
-    }
-  ],
-  "NextActions": [
-    {
-      "move": "left"
-    },
-    {
-      "move": "left"
-    },
-    {
-      "move": "up"
-    },
-    {
-      "move": "up"
-    }
-  ]
-}
-        
-## Expected Game Plan (calling updateGamePlan)
-{
-  "strategy": "We are currently on our way to the next city, Viridian City. We need to go up to go north to reach the city.",
-  "TerminalGoals": [
-    {
-        "goal": "Navigate to the north of the city."
-    }
-  ],
-  "InstrumentalGoals": [
-    {
-      "goal": "Use high-damage moves to defeat Bisasam quickly to minimize damage taken by Schiggy."
-    }
-  ],
-  "CompletedGoals": [
-    {
-      "goal": "Find Doctor Oak."
-    },
-    {
-      "goal": "Get the first Pokemon."
-    },
-    {
-      "goal": "Beat rival in pokemon battle."
-    }
-  ],
-  "NextActions": [
-    {
-      "move": "a"
-    },
-    {
-      "move": "a"
-    },
-    {
-      "move": "a"
-    },
-    {
-      "move": "a"
-    }
-  ]
-}
-"""
-
-
-        example_5_prompt = """## Example Game State 5
-
-## Previous Game State
-{
-  "strategy": "Given the number of minutes played we are in the beginning of the game. We should focus on finding Doctor Oak to get our first Pokemon.",
-  "TerminalGoals": [
-    {
-      "goal": "Find Doctor Oak"
-    }
-  ],
-  "InstrumentalGoals": [
-    {
-      "goal": "Go to the first floor of the house."
-    }
-  ],
-  "CompletedGoals": [],
-  "NextActions": [
-    {
-      "move": right"
-    }, 
-    {
-      "move": "top"
-    },
-    {
-      "move": "top"
-    }
-]
-}
-        
-## Expected Game Plan (calling updateGamePlan)
-{
-  "strategy": "Given the number of minutes played we are in the beginning of the game. I should try to reach the stairs at the top right corner of the room to go to the first floor of the house.",
-  "TerminalGoals": [
-    {
-      "goal": "Find Doctor Oak"
-    }
-  ],
-  "InstrumentalGoals": [
-    {
-      "goal": "Go to the first floor of the house."
-    }
-  ],
-  "CompletedGoals": [],
-  "NextActions": [
-    {
-      "move": "top"
-    }, 
-    {
-      "move": "top"
-    },
-    {
-      "move": "top"
-    },
-    {
-      "move": "right"
-    }
-]
-}
-"""
-
-        messages=[
-                {   
-                    "role": "system", 
-                    "content": system_prompt  
-                },
-                {   
+        for example_file in closest_examples:
+            messages.append(
+                {
                     "role": "user",
                     "content": [
                         {
                             "type": "image_url",
                             "image_url": {
-                                "url": f"data:image/png;base64,{get_local_image_as_base64('screen-0.png')}"
+                                "url": f"data:image/png;base64,{get_image_as_base64(f'examples/{example_file}')}"
                             }
                         },
                         {
                             "type": "text",
-                            "text": example_1_prompt
-                        }
-                    ]
-                }, 
-                {   
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/png;base64,{get_local_image_as_base64('screen-8.png')}"
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "text": example_2_prompt
-                        }
-                    ]
-                },
-                {   
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/png;base64,{get_local_image_as_base64('screen-4.png')}"
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "text": example_3_prompt
-                        }
-                    ]
-                },
-                {   
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/png;base64,{get_local_image_as_base64('screen-10.png')}"
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "text": example_4_prompt
-                        }
-                    ]
-                },
-                {   
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/png;base64,{get_local_image_as_base64('screen-13.png')}"
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "text": example_5_prompt
+                            "text": get_example_prompt(example_file)
                         }
                     ]
                 }
-        ]
+            )
 
         for state in past_states:
             print("Adding past state")
@@ -611,7 +282,7 @@ IMPORTANT: If the game screenshot don't change after a few moves, you might be s
                     "role": "user",
                     "content": [
                         {
-                            "type": "text", 
+                            "type": "text",
                             "text": f"# Previous Game State\n## Time\n{time}\n## Minutes played\n{minutes_played}\n## Game State\n```json\n{json.dumps(function_data, indent=2)}\n```"
                         },
                         {
@@ -623,43 +294,65 @@ IMPORTANT: If the game screenshot don't change after a few moves, you might be s
                     ],
                 }
             )
-        
-        messages.append({
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text", 
-                            "text": "# Current game screenshot\n## Time\n**NOW**"
-                            },
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/png;base64,{base64_image}"
-                            },
-                        },
-                    ],
-                })
 
+        messages.append({
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "# Current game screenshot\n## Time\n**NOW**"
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": f"data:image/png;base64,{base64_image}"
+                    },
+                },
+            ],
+        })
 
         response = client.chat.completions.create(
             model="gpt-4o",
-            messages=messages, 
+            messages=messages,
+            max_tokens=1500,
+        )
+
+        messages_function_call = [
+            {
+                "role": "system",
+                "content": "You will be given a Markdown document that describes the current game state object. Call the function as per the values in the provided in the Markdown. Don't change any of the values in the object."
+            },
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": response.choices[0].message.content
+                    }
+                ]
+            }
+        ]
+
+        print(response.choices[0].message.content)
+
+        response_function_call = client.chat.completions.create(
+            model="gpt-4o",
+            messages=messages_function_call,
             max_tokens=500,
             tools=tools,
         )
-        print (response)
-        response_message = response.choices[0].message
-        tool_calls = response_message.tool_calls
+
+        tool_calls = response_function_call.choices[0].message.tool_calls
 
         function_args = None
 
         if tool_calls:
             for tool_call in tool_calls:
-                past_states.append({ "image": base64_image, "function": json.loads(tool_call.function.arguments), "time": datetime.now(), "minutes_played": current_time_minutes})
+                past_states.append({"image": base64_image, "function": json.loads(tool_call.function.arguments),
+                                    "time": datetime.now(), "minutes_played": current_time_minutes})
                 function_args = json.loads(tool_call.function.arguments)
 
-        
-        if len(past_states) > 50:
+        if len(past_states) > 5:
             past_states.pop(0)
 
         print(function_args)
@@ -667,4 +360,4 @@ IMPORTANT: If the game screenshot don't change after a few moves, you might be s
             await execute_moves(function_args["NextActions"])
 
 if __name__ == "__main__":
-    asyncio.run(main())
+   asyncio.run(main())
