@@ -1,6 +1,6 @@
-# Pokemon Speedrunner
+# Speedrunner
 
-This Python application uses GPT-4 and CLIP to control a Pokemon game. The application uses AI to analyze the current game state and plan the next moves, aiming to play the game in a human-like manner.
+This Python application uses GPT-4 and CLIP to control an RPG game. The application uses AI to analyze the current game state and plan the next moves, aiming to play the game in a human-like manner.
 
 ## Features
 
@@ -35,7 +35,7 @@ graph LR
 
 ## Note
 
-This application is an experiment about giving GPT-4 control over a Pokemon game. It is intended for demonstration and educational purposes only.
+This application is an experiment about giving GPT-4 control over a RPG game. It is intended for demonstration and educational purposes only.
 
 ## Contributing
 
