@@ -9,7 +9,7 @@ This Python application uses GPT-4 and CLIP to control a Pokemon game. The appli
 - **Image Comparison**: The application compares the current and previous game screenshots to determine if progress is being made.
 - **Orientation**: The application provides a detailed description of the surroundings in the game, including what can be found in each direction (up, down, left, right).
 - **Example Moves**: The application provides relevant example previously captured gameplay as reference moves to improve the performance.
-- **CLIP Embedding**: The application uses OpenAI's CLIP to convert images into vector embeddings for analysis.
+- **CLIP Embedding**: The application uses OpenAI's CLIP to convert images into vector embeddings for dynamic few-shot.
 
 ## System Diagram
 
