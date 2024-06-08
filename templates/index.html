@@ -39,6 +39,11 @@
                         <ul id="completed-goals-list" class="goal-list"></ul>
                     </div>
                 </section>
+
+                <div id="closest-examples">
+                    <h2 class="section-header" onclick="toggleSection('closest-examples-grid')">Closest Examples</h2>
+                    <div id="closest-examples-grid" style="display: none;"></div>
+                </div>
                 <!--
                 <section id="game-log">
                     <h2>Game Log</h2>
@@ -50,6 +55,13 @@
             </div>
         </div>
     </main>
+    <div id="example-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <img id="modal-image" src="" alt="Example Image">
+            <p id="modal-prompt"></p>
+        </div>
+    </div>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>

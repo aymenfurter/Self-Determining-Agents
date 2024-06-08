@@ -142,6 +142,8 @@ async def main():
     current_time_minutes = datetime.now().minute
     past_states = []
 
+    is_first_run = True
+
     while True:
         base64_image = get_current_screen()
 
@@ -294,6 +296,18 @@ IMPORTANT: On Maps: Never plan ahead of the current map. Never plan ahead of war
                     ],
                 }
             )
+
+        if is_first_run:
+            messages.append({
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "{\"strategy\": \"This is the first game round. I have no completed goals yet. I need to think about defining my terminal goals given the current situation.\", \"CompletedGoals\": [], \"TerminalGoals\": [], \"InstrumentalGoals\": [], \"NextActions\": []}"
+                    }
+                ],
+            })
+            is_first_run = False
 
         messages.append({
             "role": "user",

@@ -267,7 +267,15 @@ IMPORTANT: On Maps: Never plan ahead of the current map. Never plan ahead of war
 
         closest_examples = find_closest_images(base64_image, example_files)
 
+        closest_examples_data = []
         for example_file in closest_examples:
+            closest_examples_data.append({
+                "filename": example_file,
+                "base64_image": get_image_as_base64(f'examples/{example_file}'),
+                "example_prompt": get_example_prompt(example_file)
+            })
+
+        for example in closest_examples_data:
             messages.append(
                 {
                     "role": "user",
@@ -275,16 +283,19 @@ IMPORTANT: On Maps: Never plan ahead of the current map. Never plan ahead of war
                         {
                             "type": "image_url",
                             "image_url": {
-                                "url": f"data:image/png;base64,{get_image_as_base64(f'examples/{example_file}')}"
+                                "url": f"data:image/png;base64,{example['base64_image']}"
                             }
                         },
                         {
                             "type": "text",
-                            "text": get_example_prompt(example_file)
+                            "text": example['example_prompt']
                         }
                     ]
                 }
             )
+
+        socketio.emit('closest_examples_update', {"closest_examples": closest_examples_data})
+
 
         for state in past_states:
             print("Adding past state")

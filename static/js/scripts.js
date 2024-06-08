@@ -21,6 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
         screenImage.src = `data:image/png;base64,${data.image}`;
     });
 
+    socket.on('closest_examples_update', (data) => {
+        updateClosestExamples(data.closest_examples);
+    });
+
     socket.on('goals_update', (data) => {
         updateGoals(data);
     });
@@ -32,6 +36,45 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('strategy_update', (data) => {
         strategyContent.textContent = data.strategy;
     });
+
+    function updateClosestExamples(examples) {
+        console.log('Updating closest examples:', examples);
+        const closestExamplesContainer = document.getElementById('closest-examples-grid');
+        closestExamplesContainer.innerHTML = '';
+    
+        examples.forEach(example => {
+            const img = document.createElement('img');
+            img.src = `data:image/png;base64,${example.base64_image}`;
+            img.alt = example.filename;
+            img.addEventListener('click', () => {
+                showExampleDetails(example);
+            });
+            closestExamplesContainer.appendChild(img);
+        });
+    }
+
+    function showExampleDetails(example) {
+        const modal = document.getElementById('example-modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalPrompt = document.getElementById('modal-prompt');
+        const closeButton = document.querySelector('.close-button');
+    
+        modalImage.src = `data:image/png;base64,${example.base64_image}`;
+        modalPrompt.textContent = example.example_prompt;
+    
+        modal.style.display = 'flex';
+    
+        closeButton.onclick = function() {
+            modal.style.display = 'none';
+        }
+    
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    }
+
 
     function updateGoals(data) {
         completedGoalsList.innerHTML = '';
