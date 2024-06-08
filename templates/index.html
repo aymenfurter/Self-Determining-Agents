@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title><span class="highlight">GPT-4o</span> Plays Pokemon!</title>
+</head>
+<body>
+    <header>
+        <h1><span class="highlight">GPT-4o</span> Plays Pokemon!</h1>
+    </header>
+    <main>
+        <div class="content-container">
+            <div class="left-column">
+                <img id="screen-image" src="" alt="Live Stream">
+                <div id="keys">
+                    <div class="key" id="key-up">Up</div>
+                    <div class="key" id="key-left">Left</div>
+                    <div class="key" id="key-down">Down</div>
+                    <div class="key" id="key-right">Right</div>
+                    <div class="key" id="key-a">A</div>
+                    <div class="key" id="key-b">B</div>
+                    <div class="key" id="key-start">Start</div>
+                </div>
+            </div>
+            <div class="right-column">
+                <section id="goals">
+                    <div id="terminal-goals">
+                        <h2>Terminal Goals</h2>
+                        <ul id="terminal-goals-list" class="goal-list"></ul>
+                    </div>
+                    <div id="instrumental-goals">
+                        <h2>Instrumental Goals</h2>
+                        <ul id="instrumental-goals-list" class="goal-list"></ul>
+                    </div>
+                    <div id="completed-goals">
+                        <h2>Completed Goals</h2>
+                        <ul id="completed-goals-list" class="goal-list"></ul>
+                    </div>
+                </section>
+                <!--
+                <section id="game-log">
+                    <h2>Game Log</h2>
+                    <div id="game-log-content">
+                        <ul id="game-log-list"></ul>
+                    </div>
+                </section>
+                -->
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

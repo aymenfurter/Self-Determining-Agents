@@ -5,3 +5,5 @@ rich
 markdown2
 torch
 transformers
+flask
+flask-socketio

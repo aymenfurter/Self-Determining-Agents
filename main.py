@@ -1,10 +1,8 @@
 import asyncio
 import base64
-import threading
 from rich.console import Console
 from rich.markdown import Markdown
 import markdown2
-import time
 
 import torch
 from transformers import CLIPProcessor, CLIPModel
@@ -17,81 +15,45 @@ import requests
 from PIL import Image
 from openai import OpenAI
 import os
-from flask import Flask, render_template, jsonify, request
-from flask_socketio import SocketIO, emit
 
-app = Flask(__name__)
-socketio = SocketIO(app)
 client = OpenAI()
 
-# Placeholder data
-completed_goals = []
-terminal_goals = []
-instrumental_goals = []
-pressed_keys = []
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-def send_screen_update():
-    image_url = "http://localhost:8080/screen"
-    response = requests.get(image_url)
-    response.raise_for_status()
-    image_base64 = base64.b64encode(response.content).decode('utf-8')
-    socketio.emit('screen_update', {"image": image_base64})
-
-def send_goals_update():
-    socketio.emit('goals_update', {
-        "completed_goals": completed_goals,
-        "terminal_goals": terminal_goals,
-        "instrumental_goals": instrumental_goals,
-    })
-
-def send_keys_update():
-    socketio.emit('keys_update', {"keys": pressed_keys})
-
-@socketio.on('connect')
-def handle_connect():
-    emit('initial_data', {
-        "completed_goals": completed_goals,
-        "terminal_goals": terminal_goals,
-        "instrumental_goals": instrumental_goals,
-        "keys": pressed_keys,
-    })
-    send_screen_update()
-
-@socketio.on('update_keys')
-def handle_update_keys(data):
-    global pressed_keys
-    pressed_keys = data.get('keys', [])
-    send_keys_update()
-
-async def send_command(command):
-    global pressed_keys
-    print(f"Sending command: {command}")
-
-    if "move" not in command:
-        return
-    move = command["move"]
-    pressed_keys.append(move)
-    send_keys_update()
-    requests.get(f"http://localhost:8080/input?{move}=1")
+async def send_a():
+    print("Sending A")
+    requests.get("http://localhost:8080/input?A=1")
     await asyncio.sleep(0.2)
-    pressed_keys.remove(move)
-    send_keys_update()
-    requests.get(f"http://localhost:8080/input?{move}=0")
-    await asyncio.sleep(1)
+    requests.get("http://localhost:8080/input?A=0")
+    await asyncio.sleep(0.2)
 
-async def execute_moves(moves):
-    for move in moves:
-        await send_command(move)
+async def send_up():
+    print("Sending Up")
+    requests.get("http://localhost:8080/input?Up=1")
+    await asyncio.sleep(0.2)
+    requests.get("http://localhost:8080/input?Up=0")
 
-@socketio.on('execute')
-def handle_execute(data):
-    moves = data.get('moves', [])
-    asyncio.run(execute_moves(moves))
-    emit('execute_status', {"status": "success"})
+async def send_down():
+    print("Sending Down")
+    requests.get("http://localhost:8080/input?Down=1")
+    await asyncio.sleep(0.2)
+    requests.get("http://localhost:8080/input?Down=0")
+
+async def send_left():
+    print("Sending Left")
+    requests.get("http://localhost:8080/input?Left=1")
+    await asyncio.sleep(0.2)
+    requests.get("http://localhost:8080/input?Left=0")
+
+async def send_right():
+    print("Sending Right")
+    requests.get("http://localhost:8080/input?Right=1")
+    await asyncio.sleep(0.2)
+    requests.get("http://localhost:8080/input?Right=0")
+
+async def send_b():
+    print("Sending B")
+    requests.get("http://localhost:8080/input?B=1")
+    await asyncio.sleep(0.2)
+    requests.get("http://localhost:8080/input?B=0")
 
 def get_current_screen():
     image_url = "http://localhost:8080/screen"
@@ -102,6 +64,30 @@ def get_current_screen():
 def get_local_image_as_base64(filename):
     with open(f"examples/{filename}", "rb") as image:
         return base64.b64encode(image.read()).decode('utf-8')
+
+async def send_start():
+    print("Sending Start")
+    requests.get("http://localhost:8080/input?Start=1")
+    await asyncio.sleep(0.5)
+    requests.get("http://localhost:8080/input?Start=0")
+
+async def execute_moves(moves):
+    for moveObj in moves:
+        move = moveObj["move"]
+        if move == "a":
+            await send_a()
+        elif move == "up":
+            await send_up()
+        elif move == "down":
+            await send_down()
+        elif move == "left":
+            await send_left()
+        elif move == "right":
+            await send_right()
+        elif move == "b":
+            await send_b()
+        elif move == "start":
+            await send_start()
 
 model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
 processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
@@ -152,9 +138,7 @@ def find_closest_images(base64_image, example_images, top_k=30):
     similarities.sort(reverse=True, key=lambda x: x[0])
     return [image for _, image in similarities[:top_k]]
 
-async def game_logic():
-    global completed_goals, terminal_goals, instrumental_goals
-
+async def main():
     current_time_minutes = datetime.now().minute
     past_states = []
 
@@ -211,7 +195,7 @@ async def game_logic():
                                 "items": {
                                     "type": "object",
                                     "properties": {
-                                        "move": {"type": "string", "enum": ["Up", "Down", "Left", "Right", "A", "B", "Start"], "description": "Suggested move."}
+                                        "move": {"type": "string", "enum": ["up", "down", "left", "right", "a", "b", "start"], "description": "Suggested move."}
                                     }
                                 },
                                 "description": "Up to 4 next moves",
@@ -372,32 +356,8 @@ IMPORTANT: On Maps: Never plan ahead of the current map. Never plan ahead of war
             past_states.pop(0)
 
         print(function_args)
-
-        # Update goals from function_args
-        if function_args:
-            if "CompletedGoals" in function_args:
-                completed_goals = function_args["CompletedGoals"]
-            if "TerminalGoals" in function_args:
-                terminal_goals = function_args["TerminalGoals"]
-            if "InstrumentalGoals" in function_args:
-                instrumental_goals = function_args["InstrumentalGoals"]
-            if "NextActions" in function_args:
-                await execute_moves(function_args["NextActions"])
-
-        send_goals_update()
-        send_keys_update()
-
-        await asyncio.sleep(1)  # Delay between updates
-
-def run_game_logic():
-    asyncio.run(game_logic())
-
-def screen_update_thread():
-    while True:
-        send_screen_update()
-        time.sleep(0.05)  # 50 ms interval
+        if function_args and "NextActions" in function_args:
+            await execute_moves(function_args["NextActions"])
 
 if __name__ == "__main__":
-    threading.Thread(target=run_game_logic).start()
-    threading.Thread(target=screen_update_thread).start()
-    socketio.run(app, debug=True)
+   asyncio.run(main())
