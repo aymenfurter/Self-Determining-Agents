@@ -36,7 +36,7 @@ def screen_update_thread():
 if __name__ == "__main__":
     print(Fore.GREEN + Style.BRIGHT + "🎮 Welcome! 🎮" + Style.RESET_ALL)
     print(Fore.YELLOW + "✨ Get ready for an exciting adventure! ✨" + Style.RESET_ALL)
-    print(Fore.CYAN + "🚀 Starting up the game server... 🚀" + Style.RESET_ALL)
+    print(Fore.CYAN + "🚀 Starting up ... 🚀" + Style.RESET_ALL)
 
     threading.Thread(target=run_game_logic).start()
     threading.Thread(target=screen_update_thread).start()
