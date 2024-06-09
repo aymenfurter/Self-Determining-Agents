@@ -20,7 +20,7 @@
 2. Assistance was also required during a conversation with Oak before the Pokemon selection due to a looping issue. These could be resolved with better examples, but running the application is expensive.
 
 ## Overview
-This repository introduces a self-determining agent powered by GPT-4o, capable of defining and editing its own terminal and instrumental goals. The agent interacts with the game environment, processes visual input, and makes decisions based on its cognitive capabilities. With the recent release of GPT-4o, the enhanced multimodal capabilities and increased context size allow for more images as samples in in-context learning, improving the agent's speed and efficiency.
+This repository introduces a self-determining agent powered by GPT-4o, capable of defining and editing its own terminal and instrumental goals. The agent interacts with the game environment, processes visual input, and makes decisions based on its cognitive capabilities. This is made possible by the recent release of GPT-4o, which features enhanced multimodal capabilities and a larger context size for image data. This allows for more images as samples in in-context learning, improving the agent's speed and efficiency.
 
 ## Key Features
 - **Few-Shot Learning:** Uses CLIP embeddings to match current game screenshots with relevant examples from the "examples" directory for context.
