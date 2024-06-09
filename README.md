@@ -5,7 +5,7 @@
     <img src="assets/demo.gif?raw=true">
   <h1 align="center">Self-Determining Agents with GPT-4o</h1>
   <p align="center">
-    AI agents that define their own goals to interact with a game environments. Powered by GPT-4o.
+    AI agents that define their own goals to interact with a game environment. Powered by GPT-4o.
     <br />
     <br />
     <a href="#running-the-project">Get Started</a>
