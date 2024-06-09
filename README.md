@@ -26,7 +26,7 @@ This repository introduces a self-determining agent powered by GPT-4o, capable o
 - **Few-Shot Learning:** Uses CLIP embeddings to match current game screenshots with relevant examples from the "examples" directory for context.
 - **Environment Description:** AI describes surroundings (up, down, left, right) to understand the environment better.
 - **Structured Output:** Utilizes function calling to provide environment descriptions and actions, converting them into JSON for game control.
-- **SkyEmu:** Interacts with the game emulator using a REST API for key presses and screen retrieval.
+- **Game Interaction:** Interacts with the game using a REST API for key presses and screen retrieval.
 - **Reasoning Loop:** [`GameBridge`](./game_bridge.py) manages the reasoning loop, providing the last 3 game states for planning the next action.
 
 ## Running the Project
@@ -77,7 +77,7 @@ The sample runs on both Azure OpenAI and OpenAI directly. To use Azure OpenAI, s
 
 ## Classes and Functionality
 - **[KnowledgeRepository](./knowledge_repository.py):** Finds relevant examples based on the current game screen.
-- **[ActionOrchestrator](./action_orchestrator.py):** Handles HTTP requests to SkyEmu for game control.
+- **[ActionOrchestrator](./action_orchestrator.py):** Handles HTTP requests for game control. An HTTP Endpoint to retrieve the screen and perform key actions on Port 8080 is expected.
 - **[GameBridge](./game_bridge.py):** Main reasoning loop, using previous game states for the next action.
 - **[EnvironmentPerceptions](./environment_perceptions.py):** Retrieves the current game screen and will handle environment perception in future updates.
 
