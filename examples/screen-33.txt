@@ -1,0 +1,22 @@
+## Analysis / Strategy
+Thought: I am now in a fight with Rattata.
+Thought: I need to defeat Rattata to continue towards the next city.
+
+## Terminal Goals
+- Find the next city
+
+## Instrumental Goals
+- Defeat Rattata in battle
+
+## Completed Goals
+- Find Professor Oak and get first Pokémon
+- Find Professor Oak in the north
+- Complete the dialog with Oak
+- Defeat Bisasam in battle
+- Exit the building
+
+## Next Actions
+- Press A
+- Press A
+- Press A
+- Press A

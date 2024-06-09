@@ -1,0 +1,19 @@
+## Analysis / Strategy
+Thought: I found Professor Oak.
+Thought: It looks like he is warning me to not go alone into the grass.
+Thought: I should click through the dialog.
+
+## Terminal Goals
+- Find Professor Oak and get first Pokémon
+
+## Instrumental Goals
+- Complete the dialog with Oak
+
+## Completed Goals
+- Find Professor Oak in the north
+
+## Next Actions
+- Press A
+- Press A
+- Press A
+- Press A

@@ -301,6 +301,7 @@ img#screen-image {
 
 h2 {
     margin-top: 0px;
+    font-size: 1.5rem;
 }
 
 #closest-examples-grid {
@@ -347,4 +348,39 @@ h2 {
 .section-header {
     cursor: pointer;
     user-select: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.loading-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 18px;
+    color: #555;
+    position: relative;
+}
+
+.loading-indicator::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-top: 2px solid #e67e22; 
+    border-right: 2px solid transparent;
+    animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

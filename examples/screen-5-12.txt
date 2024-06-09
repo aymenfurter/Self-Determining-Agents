@@ -1,0 +1,27 @@
+## Analysis / Strategy
+Thought: I am currently in the upper floor of the starting house.
+Thought: I need to go to the first floor to leave the house.
+Thought: I need to go to the staircase of the room.
+
+## Terminal Goals
+- Find Professor Oak and get first Pokémon
+
+## Instrumental Goals
+- Shut down computer menu
+
+## Completed Goals
+- Select BLAU as name
+- Select name for rival
+
+## Orientation
+- Top: PC MENU Screen - I want to progress & reach the first floor. I need to leave the PC MENU screen using B. 
+- Bottom: PC MENU Screen -  I want to progress & reach the first floor.  I need to leave the PC MENU screen using B. 
+- Left: PC MENU Screen -  I want to progress & reach the first floor.  I need to leave the PC MENU screen using B. 
+- Right: PC MENU Screen -  I want to progress & reach the first floor.  I need to leave the PC MENU screen using B. 
+
+## Next Actions
+- Press B
+- Press B
+- Press B
+- Press B
+

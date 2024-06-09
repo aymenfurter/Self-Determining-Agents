@@ -1,0 +1,22 @@
+## Analysis / Strategy
+Thought: I am now in the high grass.
+Thought: I need to navigate through the grass to reach the next city.
+
+## Terminal Goals
+- Find the next city
+
+## Instrumental Goals
+- Navigate through the high grass
+
+## Completed Goals
+- Find Professor Oak and get first Pokémon
+- Find Professor Oak in the north
+- Complete the dialog with Oak
+- Defeat Bisasam in battle
+- Exit the building
+
+## Next Actions
+- Press LEFT
+- Press LEFT
+- Press LEFT
+- Press UP

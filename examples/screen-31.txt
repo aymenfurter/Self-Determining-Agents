@@ -1,0 +1,22 @@
+## Analysis / Strategy
+Thought: I am now in front of the building.
+Thought: I need to head towards the next city.
+
+## Terminal Goals
+- Find the next city
+
+## Instrumental Goals
+- Navigate to the next city
+
+## Completed Goals
+- Find Professor Oak and get first Pokémon
+- Find Professor Oak in the north
+- Complete the dialog with Oak
+- Defeat Bisasam in battle
+- Exit the building
+
+## Next Actions
+- Press LEFT
+- Press LEFT
+- Press LEFT
+- Press UP

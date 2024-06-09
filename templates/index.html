@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <title><span class="highlight">GPT-4o</span> Plays Pokemon!</title>
+    <title>GPT-4o Plays Pokemon!</title>
 </head>
 <body>
     <header>
@@ -26,32 +26,26 @@
             </div>
             <div class="right-column">
                 <section id="goals">
-                    <div id="terminal-goals">
+                    <div id="goals-loading" class="loading-indicator">Loading...</div>
+                    <div id="terminal-goals" class="hidden">
                         <h2>Terminal Goals</h2>
                         <ul id="terminal-goals-list" class="goal-list"></ul>
                     </div>
-                    <div id="instrumental-goals">
+                    <div id="instrumental-goals" class="hidden">
                         <h2>Instrumental Goals</h2>
                         <ul id="instrumental-goals-list" class="goal-list"></ul>
                     </div>
-                    <div id="completed-goals">
+                    <div id="completed-goals" class="hidden">
                         <h2>Completed Goals</h2>
                         <ul id="completed-goals-list" class="goal-list"></ul>
                     </div>
                 </section>
 
                 <div id="closest-examples">
-                    <h2 class="section-header" onclick="toggleSection('closest-examples-grid')">Closest Examples</h2>
-                    <div id="closest-examples-grid" style="display: none;"></div>
+                    <h2 id="closest-examples-header" class="section-header hidden" onclick="toggleSection('closest-examples-grid')">Closest Examples</h2>
+                    <div id="closest-examples-loading" class="loading-indicator">Loading...</div>
+                    <div id="closest-examples-grid" class="hidden"></div>
                 </div>
-                <!--
-                <section id="game-log">
-                    <h2>Game Log</h2>
-                    <div id="game-log-content">
-                        <ul id="game-log-list"></ul>
-                    </div>
-                </section>
-                -->
             </div>
         </div>
     </main>

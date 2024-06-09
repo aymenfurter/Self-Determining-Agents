@@ -1,0 +1,17 @@
+## Analysis / Strategy
+Thought: I just left the building.
+Thought: I need to find Professor Oak in the north.
+
+## Terminal Goals
+- Find Professor Oak and get first Pokémon
+
+## Instrumental Goals
+- Find Professor Oak in the north
+
+## Completed Goals
+- None
+
+## Next Actions
+- Press RIGHT
+- Press UP
+- Press UP

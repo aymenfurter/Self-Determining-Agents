@@ -1,0 +1,24 @@
+## Analysis / Strategy
+Thought: I spotted a Pokémon Center.
+Thought: I should go heal my Pokémon.
+
+## Terminal Goals
+- Heal my Pokémon
+
+## Instrumental Goals
+- Navigate to the Pokémon Center
+
+## Completed Goals
+- Find Professor Oak and get first Pokémon
+- Find Professor Oak in the north
+- Complete the dialog with Oak
+- Defeat Bisasam in battle
+- Exit the building
+- Defeat Rattata in battle
+- Find the next city
+
+## Next Actions
+- Press UP
+- Press RIGHT
+- Press RIGHT
+- Press RIGHT

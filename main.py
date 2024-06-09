@@ -231,10 +231,10 @@ While you are on maps:
 IMPORTANT: 
 IN YOUR STRATEGY (Additional Chapter called: ## Orientation above Terminal Goals): ORIENT YOURSELF: WRITE FIRST WHAT I CAN FIND UP, DOWN, LEFT, RIGHT OF THE MAP. LIST ALL OBJECTS AND LOCATIONS. Example: I am currently in a room. On the rigth side there is a wall. On the left side there is a wall. On the bottom as well. Top right I can see a staircase. (this is not shown in the example but you MUST do it).
 Example
-- Top: Wall / Black Space (Obsticle)
-- Right: Wall / Black Space (Obsticle)
-- Bottom: Warp (Rug) leading outside (Bottom left), Wall / Black Space (Obsticle) (Bottom)
-- Left: Table, chairs, a character, Wall / Black Space (Obsticle)
+- Top: Wall / Black Space (Obsticle) - I can' t move up
+- Right: Wall / Black Space (Obsticle) - I can't move right
+- Bottom: Warp (Rug) leading outside (Bottom left), Wall / Black Space (Obsticle) (Bottom) - I can move down
+- Left: Table, chairs, a character, Wall / Black Space (Obsticle) - I can move left
 - Warps: Bottom left warp leads to a room with a chest.
 
 IMPORTANT: On Maps: Never plan ahead of the current map. Never plan ahead of warps.

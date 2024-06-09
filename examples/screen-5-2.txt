@@ -1,0 +1,27 @@
+## Analysis / Strategy
+Thought: I am currently in the upper floor of the starting house.
+Thought: I need to go to the first floor to leave the house.
+Thought: I need to go to the staircase of the room.
+
+## Terminal Goals
+- Find Professor Oak and get first Pokémon
+
+## Instrumental Goals
+- None
+
+## Completed Goals
+- Select BLAU as name
+- Select name for rival
+
+## Orientation
+- Top: Open Floor space - I am free to move up to the top of the loor
+- Bottom: Wall / Black Space (Obsticle) - I't move far to the bottom because the black space is blocking the way.
+- Right: Wall / Plant (Obsticle) - I can't move far to the right because the plant is blocking the way.
+- Left: Bed (Obsticle), TV (Obsticle) - The left side doesn't look interesting. The bed is not relevant to progress in the game.
+
+## Next Actions
+- Press UP
+- Press UP
+- Press UP
+- Press UP
+

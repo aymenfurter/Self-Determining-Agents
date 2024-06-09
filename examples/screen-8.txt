@@ -1,0 +1,18 @@
+## Analysis / Strategy
+Thought: I reached the first floor.
+Thought: I need to find the door to leave the building.
+
+## Terminal Goals
+- Find Professor Oak and get first Pokémon
+
+## Instrumental Goals
+- None
+
+## Completed Goals
+- None
+
+## Next Actions
+- Press DOWN
+- Press DOWN
+- Press LEFT
+- Press DOWN

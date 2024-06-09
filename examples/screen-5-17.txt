@@ -1,0 +1,29 @@
+## Analysis / Strategy
+Thought: I am currently in the upper floor of the starting house.
+Thought: I need to go to the first floor to leave the house.
+Thought: I need to go to the staircase of the room.
+
+## Terminal Goals
+- Find Professor Oak and get first Pokémon
+
+## Instrumental Goals
+- None
+
+## Completed Goals
+- Select BLAU as name
+- Select name for rival
+
+## Orientation
+- Top: Wall / Computer (Obsticle), Warp - The warp is at the top right. I should move towards it to reach the first floor.
+- Bottom: Open Floor Space, TV (Obsticle) - I can move to the bottom. The TV is blocking the way
+- Left: Wall / Black Space (Obsticle) - I can't move far because the black space / wall is blocking the way.
+- Right: Open Floor Space, Warp - The warp is at the top right. I should move towards it to reach the first floor.
+
+
+## Next Actions
+- Press UP
+- Press RIGHT
+- Press RIGHT
+- Press RIGHT
+- Press UP
+

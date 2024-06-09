@@ -1,0 +1,24 @@
+## Analysis / Strategy
+We are currently in the character creation screen. We need to select the name for our character. Our goal is to select "BLAU" as the name.
+
+## Terminal Goals
+- Go through intro sequence
+
+## Instrumental Goals
+- Skip through the dialogs
+- Select BLAU as name
+
+## Completed Goals
+- None
+
+## Orientation
+- Top: The title of the Textbox "NAME" - We are currently in "name selection"
+- Bottom: Text Box - I can progress by pressing A or B.
+- Right: This is a picture of the player - I can't take any action here.
+- Left: Name selection. I can select an available name here by selecting them with TOP / DOWN. then confirming with A.
+
+## Next Actions
+- Press DOWN
+- Press A
+- Press A
+- Press A

@@ -1,0 +1,20 @@
+## Analysis / Strategy
+Thought: I have selected Shiggy as my Pokémon.
+Thought: I need to find the next city.
+
+## Terminal Goals
+- Find the next city
+
+## Instrumental Goals
+- None
+
+## Completed Goals
+- Find Professor Oak and get first Pokémon
+- Find Professor Oak in the north
+- Complete the dialog with Oak
+
+## Next Actions
+- Press LEFT
+- Press LEFT
+- Press DOWN
+- Press DOWN

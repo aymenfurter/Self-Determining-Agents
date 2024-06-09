@@ -1,0 +1,19 @@
+## Analysis / Strategy
+Thought: Professor Oak has asked me to select a Pokémon.
+Thought: I am selecting Shiggy as my Pokémon.
+
+## Terminal Goals
+- Find Professor Oak and get first Pokémon
+
+## Instrumental Goals
+- Select a Pokémon
+
+## Completed Goals
+- Find Professor Oak in the north
+- Complete the dialog with Oak
+
+## Next Actions
+- Press A
+- Press A
+- Press A
+- Press A

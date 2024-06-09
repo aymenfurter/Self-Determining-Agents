@@ -1,0 +1,21 @@
+## Analysis / Strategy
+Thought: I am now in a battle with Shiggy.
+Thought: Bisasam has only 5% HP remaining.
+Thought: I need to continue using Tackle to defeat Bisasam as fast as possible.
+
+## Terminal Goals
+- Defeat Bisasam in battle
+
+## Instrumental Goals
+- Use Tackle to decrease Bisasam's HP
+
+## Completed Goals
+- Find Professor Oak and get first Pokémon
+- Find Professor Oak in the north
+- Complete the dialog with Oak
+
+## Next Actions
+- Press A
+- Press A
+- Press A
+- Press A

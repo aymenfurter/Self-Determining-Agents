@@ -7,3 +7,6 @@ torch
 transformers
 flask
 flask-socketio
+colorama
+art
+termcolor

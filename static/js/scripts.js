@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const terminalGoalsList = document.getElementById('terminal-goals-list');
     const instrumentalGoalsList = document.getElementById('instrumental-goals-list');
     const strategyContent = document.getElementById('strategy-content');
+    const goalsLoading = document.getElementById('goals-loading');
+    const closestExamplesLoading = document.getElementById('closest-examples-loading');
 
     socket.on('connect', () => {
         console.log('Connected to server');
@@ -38,10 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function updateClosestExamples(examples) {
-        console.log('Updating closest examples:', examples);
+        if (examples.length === 0) {
+            closestExamplesLoading.classList.add('hidden');
+            return;
+        }
         const closestExamplesContainer = document.getElementById('closest-examples-grid');
         closestExamplesContainer.innerHTML = '';
-    
+
         examples.forEach(example => {
             const img = document.createElement('img');
             img.src = `data:image/png;base64,${example.base64_image}`;
@@ -51,6 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             closestExamplesContainer.appendChild(img);
         });
+
+        closestExamplesLoading.remove();
+        closestExamplesContainer.classList.remove('hidden');
+        document.getElementById('closest-examples-header').classList.remove('hidden');
     }
 
     function showExampleDetails(example) {
@@ -58,16 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalImage = document.getElementById('modal-image');
         const modalPrompt = document.getElementById('modal-prompt');
         const closeButton = document.querySelector('.close-button');
-    
+
         modalImage.src = `data:image/png;base64,${example.base64_image}`;
         modalPrompt.textContent = example.example_prompt;
-    
+
         modal.style.display = 'flex';
-    
+
         closeButton.onclick = function() {
             modal.style.display = 'none';
         }
-    
+
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = 'none';
@@ -75,29 +84,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
     function updateGoals(data) {
+        if (data.completed_goals.length === 0 && data.terminal_goals.length === 0 && data.instrumental_goals.length === 0) {
+            return;
+        }
         completedGoalsList.innerHTML = '';
         data.completed_goals.forEach(goal => {
             const li = document.createElement('li');
             li.className = 'completed';
-            li.textContent = goal.goal;
+            li.textContent = goal;
             completedGoalsList.appendChild(li);
         });
 
         terminalGoalsList.innerHTML = '';
         data.terminal_goals.forEach(goal => {
             const li = document.createElement('li');
-            li.textContent = goal.goal;
+            li.textContent = goal;
             terminalGoalsList.appendChild(li);
         });
 
         instrumentalGoalsList.innerHTML = '';
         data.instrumental_goals.forEach(goal => {
             const li = document.createElement('li');
-            li.textContent = goal.goal;
+            li.textContent = goal;
             instrumentalGoalsList.appendChild(li);
         });
+
+        goalsLoading.remove();
+        document.querySelectorAll('#goals > div').forEach(div => div.classList.remove('hidden'));
+        
+        if (data.completed_goals.length === 0) {
+            document.getElementById('completed-goals').style.display = 'none';
+        } else {
+            document.getElementById('completed-goals').style.display = 'block';
+        }
     }
 
     function updateKeys(keysPressed) {

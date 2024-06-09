@@ -1,0 +1,18 @@
+## Analysis / Strategy
+Thought: Professor Oak has moved me to his lab.
+Thought: I need to continue through the dialog with Oak.
+
+## Terminal Goals
+- Find Professor Oak and get first Pokémon
+
+## Instrumental Goals
+- Complete the dialog with Oak
+
+## Completed Goals
+- Find Professor Oak in the north
+
+## Next Actions
+- Press A
+- Press A
+- Press A
+- Press A

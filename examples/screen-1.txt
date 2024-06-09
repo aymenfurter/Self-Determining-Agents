@@ -1,0 +1,23 @@
+## Analysis / Strategy
+We are at the very beginning of the game. I see the title screen of the game. I should press A to begin.
+
+## Terminal Goals
+- Go through intro sequence
+
+## Instrumental Goals
+- Skip through the dialogs
+
+## Completed Goals
+- None
+
+## Orientation
+- Top: Start Menu - I can start a new game here
+- Bottom: Empty space - I can't take any actions here
+- Right: Empty space - I can't take any actions here
+- Left: Empty space - I can't take any actions here
+
+## Next Actions
+- Press A
+- Press A
+- Press A
+- Press A

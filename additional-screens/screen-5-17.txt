@@ -1,0 +1,22 @@
+## Analysis / Strategy
+Thought: I am currently in the upper floor of the starting house.
+Thought: I need to go to the first floor to leave the house.
+Thought: I need to go to the staircase of the room.
+
+## Terminal Goals
+- Find Professor Oak and get first Pokémon
+
+## Instrumental Goals
+- None
+
+## Completed Goals
+- Select BLAU as name
+- Select name for rival
+
+## Next Actions
+- Press UP
+- Press RIGHT
+- Press RIGHT
+- Press RIGHT
+- Press UP
+

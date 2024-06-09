@@ -1,0 +1,19 @@
+## Analysis / Strategy
+Thought: Professor Oak has asked me to select a Pokémon.
+Thought: I need to navigate to the Pokémon I want to choose.
+
+## Terminal Goals
+- Find Professor Oak and get first Pokémon
+
+## Instrumental Goals
+- Select a Pokémon
+
+## Completed Goals
+- Find Professor Oak in the north
+- Complete the dialog with Oak
+
+## Next Actions
+- Press B
+- Press B
+- Press DOWN
+- Press RIGHT

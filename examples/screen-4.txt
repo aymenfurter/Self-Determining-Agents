@@ -1,0 +1,24 @@
+## Analysis / Strategy
+We are currently in the character creation screen. We need to select the name for our rival.
+
+## Terminal Goals
+- Go through intro sequence
+
+## Instrumental Goals
+- Skip through the dialogs
+- Select name for rival
+
+## Completed Goals
+- Select BLAU as name
+
+## Orientation
+- Top: The title of the Textbox "NAME" - We are currently in "name selection" for the rival
+- Bottom: Text Box - I can progress by pressing A or B.
+- Right: This is a picture of the rival - I can't take any action here.
+- Left: Name selection. I can select an available name here by selecting them with TOP / DOWN. then confirming with A.
+
+## Next Actions
+- Press DOWN
+- Press A
+- Press A
+- Press A
