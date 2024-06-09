@@ -34,7 +34,7 @@ def screen_update_thread():
         socketio.sleep(0.05) 
 
 if __name__ == "__main__":
-    print(Fore.GREEN + Style.BRIGHT + "🎮 Welcome to GPT-4o Plays Pokemon! 🎮" + Style.RESET_ALL)
+    print(Fore.GREEN + Style.BRIGHT + "🎮 Welcome! 🎮" + Style.RESET_ALL)
     print(Fore.YELLOW + "✨ Get ready for an exciting adventure! ✨" + Style.RESET_ALL)
     print(Fore.CYAN + "🚀 Starting up the game server... 🚀" + Style.RESET_ALL)
 
