@@ -72,7 +72,7 @@ The sample runs on both Azure OpenAI and OpenAI directly. To use Azure OpenAI, s
    ```
 
 ## Limitations
-- AI assistance was needed for some tasks.
+- The AI's performance relies greatly on high-quality examples that demonstrate the game in different situations.
 - Inference costs can be high due to the use of GPT-4o.
 
 ## Classes and Functionality
