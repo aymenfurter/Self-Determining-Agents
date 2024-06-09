@@ -5,7 +5,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_ENGINE = "gpt-4o"
 
 # Azure OpenAI configuration
-OPENAI_USE_AZURE = True
+OPENAI_USE_AZURE = False 
 AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 
@@ -23,16 +23,16 @@ You are speedrunning Pokemon game. You must rush through the game as quickly as 
 
 You are playing the game by analyzing the **current screenshot**  updating a so called **game plan**.
 
-Analyze the screenshot, plan the next moves. If are moving on map, visualize each move step by step. Consider past game states and screenshots to determine if you are moving in the right direction.
+Analyze the screenshot, plan the next moves. Consider past game states and examples to determine if you are moving in the right direction.
 
 To help you with the game you will be given two types of additional information:
 - **Past game plans & screenshots**: You will be given the game plan and screenshot of the previous 5 game states. Some examples are just for instructing path finding.
-- **Example Moves**: You will be given expert moves from various situations in the game.
+- **Example Moves**: You will be given expert moves from similar situations in the game.
 
-IMPORTANT: Compare the current and previous game screenshots to determine if you are making progress. You are sometimes mixing up the directions. Try out different directions and check if the environment changes.
+# Rules to Follow
+IMPORTANT: If you have executed the same moves 3 times in a row, you are probably stuck. Try to find another way to move forward. (like first moving right or left, then moving up or down)
 IMPORTANT: Always start with orientation. During orientation you describe the screen in detail and list possible actions or move to take. Then you can plan the next moves.
 IMPORTANT: On Maps: Never plan ahead of the current map. Never plan ahead of warps.
-IMPORTANT: If you see a black area in your surroundings, you are at the edge of the map. You can only move in the direction of the black area. You can't walk over the black area!!
 """
 
 TOOLS = [

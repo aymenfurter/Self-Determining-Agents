@@ -285,6 +285,12 @@ img#screen-image {
     width: 80%;
 }
 
+.modal-prompt {
+    font-size: 1.25rem;
+    font-family: monospace;
+    color: #333;
+}
+
 .close-button {
     color: #aaa;
     float: right;
@@ -383,4 +389,48 @@ h2 {
     100% {
         transform: rotate(360deg);
     }
+}
+
+#screen-image-container {
+    position: relative;
+    display: inline-block;
+}
+
+#screen-image {
+    width: 100%;
+    height: auto;
+}
+
+.surrounding-info {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+#surround-up {
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#surround-down {
+    bottom: 5%; 
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+#surround-left {
+    top: 50%;
+    left: 5%; 
+    transform: translate(-50%, -50%);
+}
+
+#surround-right {
+    top: 50%;
+    right: 5%; 
+    transform: translate(50%, -50%);
 }

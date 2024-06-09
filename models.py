@@ -20,4 +20,5 @@ class GameState:
     completed_goals: List[Goal]
     terminal_goals: List[Goal]
     instrumental_goals: List[Goal]
+    surroundings: List[Surrounding]
     next_actions: List[Action]

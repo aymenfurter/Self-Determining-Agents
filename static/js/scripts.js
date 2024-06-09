@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const strategyContent = document.getElementById('strategy-content');
     const goalsLoading = document.getElementById('goals-loading');
     const closestExamplesLoading = document.getElementById('closest-examples-loading');
+    const surroundUp = document.getElementById('surround-up');
+    const surroundDown = document.getElementById('surround-down');
+    const surroundLeft = document.getElementById('surround-left');
+    const surroundRight = document.getElementById('surround-right');
 
     socket.on('connect', () => {
         console.log('Connected to server');
@@ -17,6 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('initial_data', (data) => {
         updateGoals(data);
         updateKeys(data.keys);
+        updateSurroundings(data.surroundings);
+    });
+
+    socket.on('surroundings_update', (data) => {
+        updateSurroundings(data.surroundings);
     });
 
     socket.on('screen_update', (data) => {
@@ -129,6 +138,34 @@ document.addEventListener('DOMContentLoaded', () => {
             const keyElement = document.getElementById(`key-${key.toLowerCase()}`);
             if (keyElement) {
                 keyElement.classList.add('pressed');
+            }
+        });
+    }
+
+    function updateSurroundings(surroundings) {
+        surroundUp.textContent = '';
+        surroundDown.textContent = '';
+        surroundLeft.textContent = '';
+        surroundRight.textContent = '';
+        
+        if (surroundings.length === 0) {
+            surroundDown.style.display = 'none';
+            surroundUp.style.display = 'none';
+            surroundLeft.style.display = 'none';
+            surroundRight.style.display = 'none';
+            return;
+        } else {
+            surroundDown.style.display = 'block';
+            surroundUp.style.display = 'block';
+            surroundLeft.style.display = 'block';
+            surroundRight.style.display = 'block';
+        }
+
+        surroundings.forEach(surround => {
+            const direction = surround.direction.toLowerCase();
+            const element = document.getElementById(`surround-${direction}`);
+            if (element) {
+                element.textContent = surround.object;
             }
         });
     }

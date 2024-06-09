@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <title>GPT-4o Plays Pokemon!</title>
+    <title>Self-determining agent with GPT-4o</title>
 </head>
 <body>
     <header>
-        <h1><span class="highlight">GPT-4o</span> Plays Pokemon!</h1>
+        <h1><span class="highlight">Self-determining agent</span> with GPT-4o</h1>
     </header>
     <main>
         <div class="content-container">
             <div class="left-column">
-                <img id="screen-image" src="" alt="Live Stream">
+                <div id="screen-image-container">
+                    <img id="screen-image" src="" alt="Live Stream">
+                    <div id="surround-up" class="surrounding-info"></div>
+                    <div id="surround-down" class="surrounding-info"></div>
+                    <div id="surround-left" class="surrounding-info"></div>
+                    <div id="surround-right" class="surrounding-info"></div>
+                </div>
                 <div id="keys">
                     <div class="key" id="key-up">Up</div>
                     <div class="key" id="key-left">Left</div>
@@ -53,7 +59,7 @@
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <img id="modal-image" src="" alt="Example Image">
-            <p id="modal-prompt"></p>
+            <pre id="modal-prompt"></pre>
         </div>
     </div>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>

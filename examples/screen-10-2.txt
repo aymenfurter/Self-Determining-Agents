@@ -1,0 +1,23 @@
+## Analysis / Strategy
+Thought: I reached the first floor.
+Thought: I need to find the door to leave the building.
+
+## Terminal Goals
+- Find Professor Oak and get first Pokémon
+
+## Instrumental Goals
+- None
+
+## Completed Goals
+- None
+
+# Orientation
+- Top: Table, NPC - Above I can see a Desk and a NPC.
+- Bottom: Wall / Black Space (Obsticle) - On the bottom side there is a wall, I can't move far in that direction. 
+- Right: Warp - The entrance of the house is at the bottom (2x right from current location), base I want to leave the building I should focus on exit the building using this entrance.
+- Left: Wall / Black Space (Obsticle) - On the left  side there is a wall, I can't move far in that direction. 
+
+## Next Actions
+- Press RIGHT
+- Press RIGHT
+- Press DOWN

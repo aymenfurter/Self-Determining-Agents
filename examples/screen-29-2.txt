@@ -1,0 +1,28 @@
+## Analysis / Strategy
+Thought: I defeated Bisasam in battle.
+Thought: I need to leave the building.
+
+## Terminal Goals
+- Find the next city
+
+## Instrumental Goals
+- Exit the building
+
+## Completed Goals
+- Find Professor Oak and get first Pokémon
+- Find Professor Oak in the north
+- Complete the dialog with Oak
+- Defeat Bisasam in battle
+
+# Orientation
+- Top: Oak NPC - Moving here would be against my goal. I need to leave the building.
+- Bottom: Bookshelfs (Obsticle) - I can't go directly to the bottom. My path is blocked by bookshelfes. I first need to go 2x to the left and then I can go 2 down.
+- Right: book shelfs (obsticle) - I can't move far in this direction.
+- Left: book shelfs (obsticle) - I can't move in this direction.
+
+
+## Next Actions
+- Press LEFT
+- Press LEFT
+- Press DOWN
+- Press DOWN

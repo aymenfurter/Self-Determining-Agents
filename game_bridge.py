@@ -45,13 +45,21 @@ class GameBridge:
             ]
 
             for example in relevant_examples:
-                messages.append(
+                 messages.append(
                     {
                         "role": "user",
-                        "content": json.dumps({
-                            "image_url": f"data:image/png;base64,{example['base64_image']}",
-                            "text": example['example_prompt']
-                        })
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "# This is a similar situation previously recorded by expert players.\nHere is the output:\n" +  example['example_prompt']
+                            },
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": f"data:image/png;base64,{example['base64_image']}",
+                                },
+                            },
+                        ],
                     }
                 )
 
@@ -71,12 +79,12 @@ class GameBridge:
                                 "type": "text",
                                 "text": f"# Previous Game State\n## Time\n{time}\n## Minutes played\n{minutes_played}\n## Game State\n```json\n{json.dumps(function_data, indent=2)}\n```"
                             },
-                            {
-                                "type": "image_url",
-                                "image_url": {
-                                    "url": f"data:image/png;base64,{image_base64_data}"
-                                },
-                            },
+                            #{
+                            #    "type": "image_url",
+                            #    "image_url": {
+                            #        "url": f"data:image/png;base64,{image_base64_data}"
+                            #    },
+                            #},
                         ],
                     }
                 )
@@ -86,7 +94,7 @@ class GameBridge:
                 "content": [
                     {
                         "type": "text",
-                        "text": "# Current game screenshot\n## Time\n**NOW**"
+                        "text": "# Current screenshot of YOUR game that YOU are currently playing\n## Time\n**NOW**"
                     },
                     {
                         "type": "image_url",
@@ -145,30 +153,36 @@ class GameBridge:
             tool_calls = response_function_call.choices[0].message.tool_calls
 
             function_args = None
+            updated_tool_call = None
 
             if tool_calls:
                 for tool_call in tool_calls:
                     self.past_states.append({"image": base64_image, "function": json.loads(tool_call.function.arguments), "time": datetime.now(), "minutes_played": current_time_minutes})
                     function_args = json.loads(tool_call.function.arguments)
 
-            if len(self.past_states) > 5:
+            if not function_args:
+                return
+
+            if len(self.past_states) > 3:
                 self.past_states.pop(0)
 
             if function_args:
                 game_state = self.cognitive_engine.process_game_state_json(function_args)
-                if "Surroundings" in function_args:
-                    print (f"Surroundings: {function_args['Surroundings']}")
+                self.send_goals_update()
+                self.send_keys_update()
+                self.send_surroundings_update()
                 if "NextActions" in function_args:
                     await self.action_orchestrator.execute_moves(game_state.next_actions)
 
-            self.send_goals_update()
-            self.send_keys_update()
 
-            await asyncio.sleep(1) 
 
     def send_screen_update(self):
         current_screen = self.environment_perceptions.get_current_screen()
         self.socketio.emit('screen_update', {"image": current_screen})
+
+    def send_surroundings_update(self):
+        surroundings = self.cognitive_engine.get_surroundings()
+        self.socketio.emit('surroundings_update', {"surroundings": surroundings})
 
     def send_goals_update(self):
         completed_goals = self.cognitive_engine.get_completed_goals()

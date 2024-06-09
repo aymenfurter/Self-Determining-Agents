@@ -1,23 +1,29 @@
 import json
-from models import Goal, GameState, Action
+from models import Goal, GameState, Action, Surrounding
 
 class CognitiveEngine:
     def __init__(self):
         self.completed_goals = []
         self.terminal_goals = []
         self.instrumental_goals = []
+        self.surroundings = []
 
     def update_game_plan(self, game_state: GameState):
         self.update_completed_goals(game_state.completed_goals)
         self.update_terminal_goals(game_state.terminal_goals)
         self.update_instrumental_goals(game_state.instrumental_goals)
+        self.update_surrondings(game_state.surroundings)
         return GameState(
             strategy=game_state.strategy,
             completed_goals=self.completed_goals,
             terminal_goals=self.terminal_goals,
             instrumental_goals=self.instrumental_goals,
+            surroundings=game_state.surroundings,
             next_actions=game_state.next_actions
         )
+    
+    def update_surrondings(self, surroundings):
+        self.surroundings = surroundings
 
     def update_completed_goals(self, completed_goals):
         for goal in completed_goals:
@@ -41,6 +47,16 @@ class CognitiveEngine:
     def get_instrumental_goals(self):
         return [goal.goal for goal in self.instrumental_goals]
 
+    def get_surroundings(self):
+        surroundings_dict = []
+        for surrounding in self.surroundings:
+            surrounding_dict = {
+                "direction": surrounding.direction,
+                "object": surrounding.object
+            }
+            surroundings_dict.append(surrounding_dict)
+        return surroundings_dict
+
     def process_game_state(self, game_state: GameState):
         updated_game_plan = self.update_game_plan(game_state)
         return updated_game_plan
@@ -59,12 +75,14 @@ class CognitiveEngine:
         terminal_goals = [Goal(goal=goal["goal"]) for goal in game_state_dict.get("TerminalGoals", [])]
         instrumental_goals = [Goal(goal=goal["goal"]) for goal in game_state_dict.get("InstrumentalGoals", [])]
         next_actions = [Action(move=action["move"]) for action in game_state_dict.get("NextActions", [])]
+        surroundings = [Surrounding(direction=surrounding["direction"], object=surrounding["object"]) for surrounding in game_state_dict.get("Surroundings", [])]
 
         game_state = GameState(
             strategy=strategy,
             completed_goals=completed_goals,
             terminal_goals=terminal_goals,
             instrumental_goals=instrumental_goals,
+            surroundings=surroundings,
             next_actions=next_actions
         )
         return self.process_game_state(game_state)
