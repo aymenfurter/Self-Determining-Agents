@@ -15,8 +15,15 @@ Thought: I need to navigate through the grass to reach the next city.
 - Defeat Bisasam in battle
 - Exit the building
 
+# Orientation
+- Top: High Grass (Traversable), Grass (Traversable) - I can move up. There is some high grass so I may encounter pokmemon.
+- Bottom: High Grass (Traversable), Grass (Traversable) - I can move up. There is some high grass so I may encounter pokmemon.
+- Right: Fence (Obsticle) - I can't move far in this direction. The fance is blocking my path.
+- Left: Fence (Obsticle) - I can't in this direction. The fence is blocking my path.
+
+
 ## Next Actions
-- Press LEFT
-- Press LEFT
-- Press LEFT
+- Press UP 
+- Press UP
+- Press UP
 - Press UP

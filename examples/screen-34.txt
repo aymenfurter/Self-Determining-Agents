@@ -15,6 +15,12 @@ Thought: I need to defeat Rattata to continue towards the next city.
 - Defeat Bisasam in battle
 - Exit the building
 
+# Orientation
+- Top: Ratzfatz, Level 3, 15% HP.
+- Bottom: Textbox: My defense decreased. I need to traverse through the text box as fast as possible sending "A".
+- Right: I currently have Shiggy as an active Pokemon. It has 100% HP.
+- Left: Shiggy Image
+
 ## Next Actions
 - Press A
 - Press A

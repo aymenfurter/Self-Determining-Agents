@@ -12,6 +12,13 @@ Thought: I am selecting Shiggy as my Pokémon.
 - Find Professor Oak in the north
 - Complete the dialog with Oak
 
+# Orientation
+- Top: Poke Balls - I have succesfully selected one of the pokemon above. 
+- Bottom: Text Box - I can see I need to confirm if I would like to select this pokmeon. I should confirm using the A key.
+- Right: Wall (Black Area, Obsticle) - I can't move much in this direction.
+- Left: Empty area - I could move here but it would be against my goals.
+
+
 ## Next Actions
 - Press A
 - Press A

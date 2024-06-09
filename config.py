@@ -30,20 +30,9 @@ To help you with the game you will be given two types of additional information:
 - **Example Moves**: You will be given expert moves from various situations in the game.
 
 IMPORTANT: Compare the current and previous game screenshots to determine if you are making progress. You are sometimes mixing up the directions. Try out different directions and check if the environment changes.
-
-While you are on maps:
 IMPORTANT: Always start with orientation. During orientation you describe the screen in detail and list possible actions or move to take. Then you can plan the next moves.
-Example:
-```
-## Orientation
-- Top: Wall / Black Space (Obsticle) - I can' t move up
-- Right: Wall / Black Space (Obsticle) - I can't move right
-- Bottom: Warp (Rug) leading outside (Bottom left), Wall / Black Space (Obsticle) (Bottom) - I can move down
-- Left: Table, chairs, a character, Wall / Black Space (Obsticle) - I can move left
-- Warps: Bottom left warp leads to a room with a chest.
-```
-
 IMPORTANT: On Maps: Never plan ahead of the current map. Never plan ahead of warps.
+IMPORTANT: If you see a black area in your surroundings, you are at the edge of the map. You can only move in the direction of the black area. You can't walk over the black area!!
 """
 
 TOOLS = [

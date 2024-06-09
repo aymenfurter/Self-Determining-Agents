@@ -16,6 +16,13 @@ Thought: I need to continue through the high grass to reach the next city.
 - Exit the building
 - Defeat Rattata in battle
 
+
+# Orientation
+- Top: Ledge (Blocking), Sign (Obsticle) - I can't move much up. There is a Sign that cannot passed from down to up.
+- Bottom: High Grass (Traversable), Fence (Obsticle) - I could go back down but this would be against my goals of reaching the next city in the north.
+- Right: High Grass (Traverseable) - I could go in this direction. However I would likely not be able to go further up.
+- Left: High Grass (Traversable) - I can go in this direction. I should go left to go around the Sign.
+
 ## Next Actions
 - Press LEFT
 - Press UP

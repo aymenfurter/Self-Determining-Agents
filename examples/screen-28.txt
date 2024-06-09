@@ -14,6 +14,12 @@ Thought: I need to continue using Tackle to defeat Bisasam as fast as possible.
 - Find Professor Oak in the north
 - Complete the dialog with Oak
 
+# Orientation
+- Top: Bisasam, Level 5, 5% HP.
+- Bottom: Textbox: I seemed to have done a direct hit. I need to traverse through the text box as fast as possible sending "A".
+- Right: I currently have Shiggy as an active Pokemon. It has 45% HP.
+- Left: Shiggy Image
+
 ## Next Actions
 - Press A
 - Press A

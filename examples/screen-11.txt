@@ -11,6 +11,12 @@ Thought: I need to find Professor Oak in the north.
 ## Completed Goals
 - None
 
+# Orientation
+- Top: House / Door - I don't want to enter the door. I just left the building. I should now focus on finding Professor Oak in the North.
+- Bottom: Grass (Traversable) - I could move to the bottom however my goal is t ofind professor oak in the north first.
+- Right: Grass (Traversable) - I can walk to the right to go around the house to find professor Oak in the north.
+- Left: Grass (Traversable) - The area to the left is also free, however it is faster to go through the right side. 
+
 ## Next Actions
 - Press RIGHT
 - Press RIGHT

@@ -16,6 +16,13 @@ Thought: I need to continue towards the next city.
 - Exit the building
 - Defeat Rattata in battle
 
+# Orientation
+- Top: Passage through Fence - I should follow the passage to go through the fence to enter the next city.
+- Bottom: Passage through Fence - I could go back to the bottom. However that would be against my goals.
+- Left: Fence (Blocking) - I can't go far left the fence is blocknig my way.
+- Right: Fence (Blocking) - I could'nt go to the right (fence blocking my way)
+
+
 ## Next Actions
 - Press UP
 - Press UP

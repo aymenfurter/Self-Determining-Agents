@@ -13,6 +13,12 @@ Thought: I was asked if I want to select a nickname.
 - Find Professor Oak in the north
 - Complete the dialog with Oak
 
+# Orientation
+- Top: Poke Balls - I have succesfully selected one of the pokemon above. 
+- Bottom: Text Box - I am beeing asked if I want to give a nickname. I press DOWN and say A to skip.
+- Right: Wall (Black Area, Obsticle) - I can't move much in this direction.
+- Left: Empty area - I could move here but it would be against my goals.
+
 ## Next Actions
 - Press DOWN
 - Press A

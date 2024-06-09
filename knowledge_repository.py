@@ -15,7 +15,7 @@ class KnowledgeRepository:
         outputs = self.model.get_image_features(**inputs)
         return outputs
 
-    def find_closest_images(self, base_image, example_images, top_k=5):
+    def find_closest_images(self, base_image, example_images, top_k=10):
         base_image_embedding = self.get_clip_embedding(base_image)
         similarities = []
         for example_image_base64 in example_images:

@@ -16,6 +16,12 @@ Thought: I need to continue towards the next city.
 - Exit the building
 - Defeat Rattata in battle
 
+# Orientation
+- Top: Fence (Blocking), Passage through Fence - I should take the passage (1x left 2 up) to go through the fence to reach the next city.
+- Bottom: Ledge (Traversable from above), Grass (Traversable) - I could go back down but it would be against my goals
+- Right: Grass (Traversable) - I could go right but there is path that reaches further north. 
+- Left: Grass (Traversable) - I could go left but there is path that reaches further north. 
+
 ## Next Actions
 - Press LEFT
 - Press UP

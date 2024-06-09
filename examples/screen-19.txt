@@ -11,6 +11,12 @@ Thought: I need to continue through the dialog with Oak.
 ## Completed Goals
 - Find Professor Oak in the north
 
+# Orientation
+- Top: Wall / Black Area - I can't walk up as I am in a conversation. Also there is a wall that blocks me from moving far in this direction
+- Bottom: Textbox (Conversation with Enemy) - Should go through the conversation as fast as possible.
+- Right: Pokemon Balls - I need to select a pokemon once the conversation is completed.
+- Left: Empty area - I could move here but it would be against my goals.
+
 ## Next Actions
 - Press A
 - Press A

@@ -12,6 +12,12 @@ Thought: I need to navigate to the Pokémon I want to choose.
 - Find Professor Oak in the north
 - Complete the dialog with Oak
 
+# Orientation
+- Top: Poke Balls - I need to select the pokeball. I should press right and up to choose a pokemon.
+- Bottom: Bookshelfs (obsticle), exit - Once I have selected the pokemon I can leave in this direction.
+- Right: Wall (Black Area, Obsticle) - I can't move much in this direction.
+- Left: Empty area - I could move here but it would be against my goals.
+
 ## Next Actions
 - Press RIGHT
 - Press UP

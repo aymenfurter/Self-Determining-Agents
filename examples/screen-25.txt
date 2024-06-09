@@ -1,6 +1,7 @@
 ## Analysis / Strategy
 Thought: I have selected Shiggy as my Pokémon.
 Thought: I need to find the next city.
+Thought: I should now exit the house
 
 ## Terminal Goals
 - Find the next city
@@ -12,6 +13,12 @@ Thought: I need to find the next city.
 - Find Professor Oak and get first Pokémon
 - Find Professor Oak in the north
 - Complete the dialog with Oak
+
+# Orientation
+- Top: Poke Balls - 2 Pokeballs have been taken. 
+- Bottom: Bookshelfs (obsticle), exit - I can now leave in this direction. There are bookshelfs in may way so I need to first move LEFT two times.
+- Right: Wall (Black Area, Obsticle) - I can't move much in this direction.
+- Left: Empty area - I could move here but it would be against my goals.
 
 ## Next Actions
 - Press LEFT

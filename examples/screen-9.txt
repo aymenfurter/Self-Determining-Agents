@@ -11,6 +11,12 @@ Thought: I need to find the door to leave the building.
 ## Completed Goals
 - None
 
+# Orientation
+- Top: Table, NPC - Above I can see a Desk and a NPC.
+- Bottom: Warp - The entrance of the house is at the bottom (1 right and 1 down based on my current location), base I want to leave the building I should focus on exit the building using this entrance.
+- Right: Wall / Black Space (Obsticle) - On the right side there is a wall, I can't move far in that direction.
+- Left: Warp - The entrance of the house is at the bottom (1 right and 1 down based on my current location), base I want to leave the building I should focus on exit the building using this entrance.
+
 ## Next Actions
 - Press LEFT
 - Press LEFT

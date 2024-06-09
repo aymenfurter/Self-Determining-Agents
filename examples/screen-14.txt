@@ -11,6 +11,13 @@ Thought: I need to find Professor Oak in the north.
 ## Completed Goals
 - None
 
+# Orientation
+- Top: Fence (Obsticle), High Grass (Traversable) -  I should enter the grass on the top to find Oak. The path directly above me is blocked by the fence. To reach the grass I need one left and one up
+- Bottom: House, Obsticle, Grass (Traversable) - I could move to the bottom however my goal is t ofind professor oak in the north first!
+- Right: Grass (Traversable) - I could walk to the right but it would be against my goals. I want to reach the grass to find oak. 
+- Left: Grass (Traversable) - I could walk to the right but it would be against my goals. I want to reach the grass to find oak. 
+
+
 ## Next Actions
 - Press LEFT
 - Press UP

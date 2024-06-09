@@ -15,6 +15,13 @@ Thought: I need to defeat Rattata to continue towards the next city.
 - Defeat Bisasam in battle
 - Exit the building
 
+# Orientation
+- Top: Ratzfatz
+- Bottom: Textbox: A wild Ratzfatz appeared.
+- Right: I have one pokeon (Shiggy)
+- Left: Player Image
+
+
 ## Next Actions
 - Press A
 - Press A

@@ -14,6 +14,13 @@ Thought: I need to leave the building.
 - Complete the dialog with Oak
 - Defeat Bisasam in battle
 
+# Orientation
+- Top: Oak NPC - Moving here would be against my goal. I need to leave the building.
+- Bottom: Exit - The way to the bottom leads to the exit of the house. I should move down to reach it.
+- Right: book shelfs (obsticle) - I can't move far in this direction.
+- Left: book shelfs (obsticle) - I can't move in this direction.
+
+
 ## Next Actions
 - Press DOWN
 - Press DOWN

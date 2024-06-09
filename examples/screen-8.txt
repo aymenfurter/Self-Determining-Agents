@@ -11,6 +11,12 @@ Thought: I need to find the door to leave the building.
 ## Completed Goals
 - None
 
+## Orientation
+- Top: TV (Obsticle), Book Shelfs (Obsticle) - There are book shells and the TV at the top of the map.
+- Bottom: Warp - The entrance of the house is at the bottom (1 right and 2 down based on my current location), base I want to leave the building I should focus on exit the building using this entrance.
+- Right: Table (Obsticle) - On the right side I can see a the NPC and a table. I want to make as much progress as possible so I should not speak to the NPC.
+- Left:  Wall / Black Space (Obsticle)  - I can't move to the left, as there is a wall.
+
 ## Next Actions
 - Press DOWN
 - Press DOWN

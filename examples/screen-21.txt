@@ -12,6 +12,12 @@ Thought: I need to navigate to the Pokémon I want to choose.
 - Find Professor Oak in the north
 - Complete the dialog with Oak
 
+# Orientation
+- Top: Wall / Black Area - I can't walk up as I am in a conversation. Also there is a wall that blocks me from moving far in this direction
+- Bottom: Textbox (Conversation with Enemy) - Should go through the conversation as fast as possible.
+- Right: Pokemon Balls - I need to select a pokemon once the conversation is completed.
+- Left: Empty area - I could move here but it would be against my goals.
+
 ## Next Actions
 - Press B
 - Press B

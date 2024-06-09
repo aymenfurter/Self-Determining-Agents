@@ -13,6 +13,12 @@ Thought: I need to defeat Bisasam by using Tackle to decrease its HP as fast as 
 - Find Professor Oak in the north
 - Complete the dialog with Oak
 
+# Orientation
+- Top: Bisasam, Level 5, Full HP
+- Bottom: Selection of Moves - I should press A to confirm usage of currently selected move "Tackle".
+- Right: I currently have Shiggy as an active Pokemon. It has full HP.
+- Left: I have 35/35 moves available for Tackle.
+
 ## Next Actions
 - Press A
 - Press A

@@ -16,6 +16,12 @@ Thought: I need to continue through the high grass to reach the next city.
 - Exit the building
 - Defeat Rattata in battle
 
+# Orientation
+- Top: High Grass (Traversable) - I can go further top through the high grass. 
+- Bottom: High Grass (Traversable) - I could go back down but it would be against my goals
+- Left: Grass (Traversable) - I could go to the left but its unlikly that I could reach further north that way.
+- Right: High Grass (Traversable) - I could go to the right however I should reach the next city in the north.
+
 ## Next Actions
 - Press UP
 - Press UP

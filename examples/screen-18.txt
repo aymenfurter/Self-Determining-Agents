@@ -12,8 +12,14 @@ Thought: I should click through the dialog.
 ## Completed Goals
 - Find Professor Oak in the north
 
+# Orientation
+- Top: High Grass (Traversable) - I am already within the glass, having a conversation with oak. On top the grass area continues. I can wallk through the grass but currently I am in a conversation so I can't do it.
+- Bottom: Textbox (Conversation with Oak) - Should go through the conversation as fast as possible.
+- Right: Fence (Obsticle), High (Traversable) - I can't walk far to the right. I am blocked by the fence.
+- Left: Fence (Obsticle)- I can't walk to the left. I am blocked by the fence.
+
 ## Next Actions
-- Press A
-- Press A
-- Press A
-- Press A
+- Press B
+- Press B
+- Press B
+- Press B

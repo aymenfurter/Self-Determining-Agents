@@ -15,8 +15,15 @@ Thought: I need to head towards the next city.
 - Defeat Bisasam in battle
 - Exit the building
 
+# Orientation
+- Top: Oak's House / Door - I could enter Oaks house again. However it would be against my goals.
+- Bottom: Fence (Obsticle) - I can't move down. The way is blocked by the fence.
+- Right: Grass (Traversable) - I can move in this direction 
+- Left: Grass (Traversable) - I can move in this direction, I should go around the building by first going left. Then up to go in north to the next city.
+
+
 ## Next Actions
 - Press LEFT
 - Press LEFT
-- Press LEFT
+- Press LEFT 
 - Press UP
