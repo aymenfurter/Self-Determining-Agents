@@ -37,8 +37,8 @@ This repository introduces a self-determining agent powered by GPT-4o, capable o
 ### Installation
 1. Clone the repository and navigate to the project directory:
    ```sh
-   git clone https://github.com/yourusername/self-determining-agent.git
-   cd self-determining-agent
+   git clone https://github.com/aymenfurter/Self-Determining-Agent-GPT4o.git
+   cd Self-Determining-Agent-GPT4o
    ```
 2. Install the required packages using pip:
    ```sh
